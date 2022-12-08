@@ -205,6 +205,8 @@ static VALUE rb_raise_mysql2_error(mysql_client_wrapper *wrapper) {
   rb_enc_associate(rb_error_msg, rb_utf8_encoding());
   rb_enc_associate(rb_sql_state, rb_usascii_encoding());
 
+  fprintf(stderr, "error_msg: %s\n", rb_error_msg);
+  fprintf(stderr, "sql_state: %s\n", rb_sql_state);
   e = rb_funcall(cMysql2Error, intern_new_with_args, 4,
                  rb_error_msg,
                  LONG2FIX(wrapper->server_version),
@@ -1087,12 +1089,12 @@ static VALUE rb_mysql_client_session_track(VALUE self, VALUE type) {
  * if it was an UPDATE, DELETE, or INSERT.
  */
 static VALUE rb_mysql_client_affected_rows(VALUE self) {
-  fprintf(stderr, "hogehogehoge\n");
   my_ulonglong retVal;
   GET_CLIENT(self);
 
   REQUIRE_CONNECTED(wrapper);
   retVal = mysql_affected_rows(wrapper->client);
+  fprintf(stderr, "%d\n",retVal);
   if (retVal == (my_ulonglong)-1) {
     rb_raise_mysql2_error(wrapper);
   }
