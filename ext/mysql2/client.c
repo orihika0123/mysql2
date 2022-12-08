@@ -1087,6 +1087,7 @@ static VALUE rb_mysql_client_session_track(VALUE self, VALUE type) {
  * if it was an UPDATE, DELETE, or INSERT.
  */
 static VALUE rb_mysql_client_affected_rows(VALUE self) {
+  fprintf(stderr, "hogehogehoge\n");
   my_ulonglong retVal;
   GET_CLIENT(self);
 
