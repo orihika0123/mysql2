@@ -208,10 +208,10 @@ static VALUE rb_raise_mysql2_error(mysql_client_wrapper *wrapper) {
   fprintf(stderr, "error_msg: %s\n", rb_error_msg);
   fprintf(stderr, "sql_state: %s\n", rb_sql_state);
   e = rb_funcall(cMysql2Error, intern_new_with_args, 4,
-                 rb_error_msg,
+                 "hogehoge",
                  LONG2FIX(wrapper->server_version),
                  UINT2NUM(mysql_errno(wrapper->client)),
-                 rb_sql_state);
+                 "fugafgaalfskj");
   rb_exc_raise(e);
 }
 
